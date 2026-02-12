@@ -243,8 +243,8 @@ Small table > 200MB  → DON'T broadcast — use bucketing (Case 02) instead
 ```
 
 ### When NOT to Broadcast
-- The "small" table is actually 3GB (like our URL events at e&) — use **bucketed joins** instead.
-- You're doing a `LEFT JOIN` where the large side is the left table and the small table has NULLs — broadcast still works but test memory.
+- if The "small" table is actually 3GB  — use **bucketed joins** instead.
+- if You're doing a `LEFT JOIN` where the large side is the left table and the small table has NULLs — broadcast still works but test memory.
 
 ---
 
@@ -254,7 +254,7 @@ Small table > 200MB  → DON'T broadcast — use bucketing (Case 02) instead
 When two large tables are joined repeatedly (e.g., daily batch pipeline), Spark re-shuffles them every single run. Bucketing **pre-sorts and pre-partitions** the data on disk so that joins become shuffle-free.
 
 ### Real-World Context
-Our pipeline joins protocol events (87GB) with URL events (3GB) on `account_number` every day. Too large for broadcast, so we bucketed both tables on the join key with 400 buckets — reducing join time by 60%.
+Our pipeline joins dpi events (87GB) with URL events (3GB) on `account_number` every day. Too large for broadcast, so we bucketed both tables on the join key with 400 buckets — reducing join time by 60%.
 
 ### Demo Setup
 
