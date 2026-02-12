@@ -998,7 +998,7 @@ spark_aqe.stop()
 ### AQE Configs We Used in Production
 
 ```python
-# These are the exact configs from our e& pipeline spark-submit command:
+# These are the exact configs from real world pipeline spark-submit command:
 {
     "spark.sql.adaptive.enabled": "true",
     "spark.sql.adaptive.coalescePartitions.enabled": "true",
@@ -1257,7 +1257,7 @@ spark2.stop()
 ### Production spark-submit GC Configs
 
 ```bash
-# The exact GC flags we used in production (from our e& pipeline):
+# The exact GC flags we used in production (from real world pipeline):
 --conf spark.executor.extraJavaOptions='-XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseCompressedOops'
 --conf spark.driver.extraJavaOptions='-XX:+UseG1GC -XX:MaxGCPauseMillis=200'
 ```
